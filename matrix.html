@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Effect</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: black; font-family: 'Courier New', Courier, monospace; }
+        canvas { display: block; }
+
+        #side-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 12px; 
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 1000;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 1px solid rgba(0, 255, 0, 0.2);
+            overflow-x: hidden;
+            cursor: pointer;
+        }
+
+        #side-panel.active, #side-panel:hover {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(0, 255, 0, 0.5);
+        }
+
+        .sidebar-header {
+            padding: 30px 20px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #side-panel.active .sidebar-header, #side-panel:hover .sidebar-header {
+            opacity: 1;
+        }
+
+        .sidebar-header h3 { margin: 0; font-size: 16px; color: #0f0; letter-spacing: 2px; }
+        .sidebar-header p { margin: 8px 0 0 0; font-size: 11px; color: rgba(0, 255, 0, 0.8); text-transform: uppercase; }
+
+        #gui-hook { opacity: 0; transition: opacity 0.4s; padding: 10px; }
+        #side-panel.active #gui-hook, #side-panel:hover #gui-hook { opacity: 1; }
+
+        .dg.main { width: 100% !important; background: transparent !important; }
+        .dg li.cr { background: transparent !important; border-bottom: 1px solid rgba(0, 255, 0, 0.1) !important; color: #0f0 !important; }
+        .dg li.title { background: rgba(0, 255, 0, 0.15) !important; color: #0f0 !important; }
+        .dg .close-button, .dg.ac { display: none !important; }
+    </style>
+</head>
+<body>
+    <div id="side-panel">
+        <div class="sidebar-header">
+            <h3>MATRIX TERMINAL</h3>
+            <p>Status: Protocol Active</p>
+            <p>Creator: joaorizzo0112</p>
+        </div>
+        <div id="gui-hook"></div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
